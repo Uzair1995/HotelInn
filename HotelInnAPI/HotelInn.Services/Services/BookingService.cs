@@ -26,7 +26,7 @@ namespace HotelInn.Services.Services
         public async Task<string> AddNewBookingAsync(Contracts.Booking.NewBooking newBooking)
         {
             if (newBooking == null)
-                return "Value cannot be null";
+                return "Value cannot be null!";
 
             if (newBooking.CheckinDateTime >= newBooking.CheckoutDateTime || newBooking.CheckinDateTime <= DateTime.Now)
                 return "Invalid checkin checkout time provided!";

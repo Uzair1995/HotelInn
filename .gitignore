@@ -18,3 +18,5 @@
 /HotelInnAPI/HotelInnAPI/bin/Debug/net5.0
 /HotelInnAPI/HotelInnAPI/obj
 /HotelInnAPI/Serilog/Logs
+/HotelInnAPI/HotelInnAPI.Tests/bin/Debug/net5.0
+/HotelInnAPI/HotelInnAPI.Tests/obj

@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInnAPI", "HotelInnAPI\HotelInnAPI.csproj", "{E85F02A0-5821-48D0-8B56-EE85D82FFF85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInnAPI", "HotelInnAPI\HotelInnAPI.csproj", "{E85F02A0-5821-48D0-8B56-EE85D82FFF85}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{88918B23-8FD1-4F52-AB92-AFCF81A63292}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{34748811-8FA3-405B-AE18-CE42E6677192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInn.Contracts", "HotelInn.Contracts\HotelInn.Contracts.csproj", "{2EB124BD-F7CF-42BF-A7F1-6F38293C0E05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInn.Contracts", "HotelInn.Contracts\HotelInn.Contracts.csproj", "{2EB124BD-F7CF-42BF-A7F1-6F38293C0E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInn.Domain", "HotelInn.Domain\HotelInn.Domain.csproj", "{5386D8E2-876E-4A91-85D0-8DC5F1B05379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInn.Domain", "HotelInn.Domain\HotelInn.Domain.csproj", "{5386D8E2-876E-4A91-85D0-8DC5F1B05379}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInn.Services", "HotelInn.Services\HotelInn.Services.csproj", "{D83B10BC-065D-4813-96EA-E85B0354DAF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInn.Services", "HotelInn.Services\HotelInn.Services.csproj", "{D83B10BC-065D-4813-96EA-E85B0354DAF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInn.Services.Abstractions", "HotelInn.Services.Abstractions\HotelInn.Services.Abstractions.csproj", "{D6519545-385E-4C33-934A-83EB7534E863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInn.Services.Abstractions", "HotelInn.Services.Abstractions\HotelInn.Services.Abstractions.csproj", "{D6519545-385E-4C33-934A-83EB7534E863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInn.Persistence", "HotelInn.Persistence\HotelInn.Persistence.csproj", "{8A18FC34-846A-4107-9321-CAB5417B2728}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInn.Persistence", "HotelInn.Persistence\HotelInn.Persistence.csproj", "{8A18FC34-846A-4107-9321-CAB5417B2728}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInn.Presentation", "HotelInn.Presentation\HotelInn.Presentation.csproj", "{BD7DED9E-069C-499D-B776-41A7B64C3383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInn.Presentation", "HotelInn.Presentation\HotelInn.Presentation.csproj", "{BD7DED9E-069C-499D-B776-41A7B64C3383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInnAPI.Tests", "HotelInnAPI.Tests\HotelInnAPI.Tests.csproj", "{24C7DD02-9D5B-4B93-B7EE-7B79BAB62220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{BD7DED9E-069C-499D-B776-41A7B64C3383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD7DED9E-069C-499D-B776-41A7B64C3383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD7DED9E-069C-499D-B776-41A7B64C3383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C7DD02-9D5B-4B93-B7EE-7B79BAB62220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C7DD02-9D5B-4B93-B7EE-7B79BAB62220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C7DD02-9D5B-4B93-B7EE-7B79BAB62220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C7DD02-9D5B-4B93-B7EE-7B79BAB62220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
