@@ -1,6 +1,8 @@
 ﻿using HotelInn.Domain.IRepositories;
 using HotelInn.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -50,6 +52,11 @@ namespace HotelInn.Persistence.Repositories
         public async Task<User> FindUserAsync(string userId)
         {
             return await hotelInnDbContext.Users.FindAsync(userId);
+        }
+
+        public async Task<List<User>> ListAllUsersAsync()
+        {
+            return await hotelInnDbContext.Users.ToListAsync();
         }
     }
 }

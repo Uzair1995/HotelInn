@@ -18,6 +18,8 @@ namespace HotelInn.Persistence.Repositories
 
 
             services.AddTransient<IHotelRepository, HotelRepository>();
+            services.AddTransient<IBookingRepository, BookingRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
     }
 }

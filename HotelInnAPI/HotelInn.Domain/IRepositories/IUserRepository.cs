@@ -1,4 +1,5 @@
 ﻿using HotelInn.Domain.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelInn.Domain.IRepositories
@@ -8,5 +9,6 @@ namespace HotelInn.Domain.IRepositories
         Task AddOrUpdateUserAsync(User user);
         Task<User> FindUserAsync(string userId);
         Task DeleteUserAsync(string userId);
+        Task<List<User>> ListAllUsersAsync();
     }
 }

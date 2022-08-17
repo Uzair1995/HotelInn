@@ -10,6 +10,7 @@ namespace HotelInn.Services
         {
             services.AddTransient<IHotelService, HotelService>();
             services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }
