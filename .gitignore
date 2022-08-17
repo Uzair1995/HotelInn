@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/HotelInnAPI/.vs/HotelInnAPI
+/HotelInnAPI/HotelInn.Contracts/bin/Debug/net5.0
+/HotelInnAPI/HotelInn.Contracts/obj
+/HotelInnAPI/HotelInn.Domain/bin/Debug/net5.0
+/HotelInnAPI/HotelInn.Domain/obj
+/HotelInnAPI/HotelInn.Persistence/bin/Debug/net5.0
+/HotelInnAPI/HotelInn.Persistence/obj
+/HotelInnAPI/HotelInn.Presentation/bin/Debug/net5.0
+/HotelInnAPI/HotelInn.Presentation/obj
+/HotelInnAPI/HotelInn.Services/bin/Debug/net5.0
+/HotelInnAPI/HotelInn.Services/obj
+/HotelInnAPI/HotelInn.Services.Abstractions/bin/Debug/net5.0
+/HotelInnAPI/HotelInn.Services.Abstractions/obj
+/HotelInnAPI/HotelInnAPI/bin/Debug/net5.0
+/HotelInnAPI/HotelInnAPI/obj
+/HotelInnAPI/Serilog/Logs
