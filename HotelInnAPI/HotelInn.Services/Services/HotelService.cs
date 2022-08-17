@@ -1,6 +1,8 @@
 ﻿using HotelInn.Domain.IRepositories;
 using HotelInn.Services.Abstractions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelInn.Services.Services
@@ -98,6 +100,12 @@ namespace HotelInn.Services.Services
 
             await hotelRepository.Value.DeleteHotelAsync(hotelId);
             return "Delete successfully!";
+        }
+
+        public async Task<List<Contracts.Hotel.Hotel>> SearchHotels(Contracts.Hotel.SearchHotel searchHotel)
+        {
+            List<Domain.Models.Hotel> hotels = await hotelRepository.Value.SearchHotelsAndListAsync(searchHotel);
+            return hotels.Select(x => x.ToDto()).ToList();
         }
     }
 }

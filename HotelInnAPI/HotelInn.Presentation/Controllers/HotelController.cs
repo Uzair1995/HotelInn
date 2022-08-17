@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HotelInn.Contracts.Hotel;
 using HotelInn.Services.Abstractions;
@@ -28,9 +29,9 @@ namespace HotelInn.Presentation.Controllers
 
         [SwaggerOperation(Summary = "List hotels.")]
         [HttpGet("list")]
-        public async Task<Hotel> GetHotelsListAsync([FromQuery] string hotelId)
+        public async Task<List<Hotel>> GetHotelsListAsync([FromQuery] SearchHotel searchHotel)
         {
-            return await hotelService.Value.FindHotelAsync(hotelId);
+            return await hotelService.Value.SearchHotels(searchHotel); ;
         }
 
         [SwaggerOperation(Summary = "Add a new hotel.")]
