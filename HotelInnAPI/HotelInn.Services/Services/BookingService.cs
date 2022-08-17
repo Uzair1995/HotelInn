@@ -1,8 +1,8 @@
-﻿using HotelInn.Contracts.Booking;
-using HotelInn.Domain.IRepositories;
+﻿using HotelInn.Domain.IRepositories;
 using HotelInn.Services.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelInn.Services.Services
@@ -23,7 +23,7 @@ namespace HotelInn.Services.Services
             this.userRepository = userRepository;
         }
 
-        public async Task<string> AddNewBookingAsync(NewBooking newBooking)
+        public async Task<string> AddNewBookingAsync(Contracts.Booking.NewBooking newBooking)
         {
             if (newBooking == null)
                 return "Value cannot be null";
@@ -66,22 +66,31 @@ namespace HotelInn.Services.Services
             return "Delete successfully!";
         }
 
-        public Task<Booking> FindBookingAsync(string bookingId)
+        public async Task<Contracts.Booking.Booking> FindBookingAsync(string bookingId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(bookingId))
+                return null;
+
+            Domain.Models.Booking booking = await bookingRepository.Value.FindBookingAsync(bookingId);
+            if (booking == null)
+                return null;
+
+            return booking.ToDto();
         }
 
-        public Task<List<Booking>> FindHotelBookingsAsync(string hotelId)
+        public async Task<List<Contracts.Booking.Booking>> FindHotelBookingsAsync(string hotelId)
         {
-            throw new NotImplementedException();
+            List<Domain.Models.Booking> bookings = await bookingRepository.Value.FindHotelBookingsAsync(hotelId);
+            return bookings.Select(x => x.ToDto()).ToList();
         }
 
-        public Task<List<Booking>> FindUserBookingsAsync(string userId)
+        public async Task<List<Contracts.Booking.Booking>> FindUserBookingsAsync(string userId)
         {
-            throw new NotImplementedException();
+            List<Domain.Models.Booking> bookings = await bookingRepository.Value.FindUserBookingsAsync(userId);
+            return bookings.Select(x => x.ToDto()).ToList();
         }
 
-        public async Task<string> UpdateBookingAsync(Booking booking)
+        public async Task<string> UpdateBookingAsync(Contracts.Booking.Booking booking)
         {
             if (booking == null || booking.BookingId == null)
                 return "Value cannot be null";

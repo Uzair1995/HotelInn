@@ -1,6 +1,9 @@
 ﻿using HotelInn.Domain.IRepositories;
 using HotelInn.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -50,6 +53,16 @@ namespace HotelInn.Persistence.Repositories
         public async Task<Booking> FindBookingAsync(string bookingId)
         {
             return await hotelInnDbContext.Bookings.FindAsync(bookingId);
+        }
+
+        public async Task<List<Booking>> FindHotelBookingsAsync(string hotelId)
+        {
+            return await hotelInnDbContext.Bookings.Where(x => x.HotelId.Equals(hotelId)).ToListAsync();
+        }
+
+        public async Task<List<Booking>> FindUserBookingsAsync(string userId)
+        {
+            return await hotelInnDbContext.Bookings.Where(x => x.UserId.Equals(userId)).ToListAsync();
         }
     }
 }

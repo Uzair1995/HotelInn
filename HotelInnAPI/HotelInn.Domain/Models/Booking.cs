@@ -15,5 +15,17 @@ namespace HotelInn.Domain.Models
         public string HotelId { get; set; }
         public DateTime CheckinDateTime { get; set; }
         public DateTime CheckoutDateTime { get; set; }
+
+        public Contracts.Booking.Booking ToDto()
+        {
+            return new Contracts.Booking.Booking
+            {
+                BookingId = BookingId,
+                UserId = UserId,
+                HotelId = HotelId,
+                CheckinDateTime = CheckinDateTime,
+                CheckoutDateTime = CheckoutDateTime
+            };
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using HotelInn.Domain.IRepositories;
 using HotelInn.Services.Abstractions;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelInn.Services.Services
@@ -85,25 +84,7 @@ namespace HotelInn.Services.Services
             if (hotel == null)
                 return null;
 
-            return new Contracts.Hotel.Hotel
-            {
-                HotelId = hotel.HotelId,
-                Name = hotel.Name,
-                Address = hotel.Address,
-                City = hotel.City,
-                Country = hotel.Country,
-                Description = hotel.Description,
-                Rating = hotel.Rating,
-                ReviewsCount = hotel.ReviewsCount,
-                Price = hotel.Price,
-                BreakfastFacility = hotel.BreakfastFacility,
-                WifiFacility = hotel.WifiFacility,
-                ParkingFacility = hotel.ParkingFacility,
-                SpaFacility = hotel.SpaFacility,
-                Availability = hotel.Availability,
-                Tags = hotel.Tags?.Split(',').ToList(),
-                Pics = hotel.Pics?.Split(',').ToList()
-            };
+            return hotel.ToDto();
         }
 
         public async Task<string> DeleteHotelAsync(string hotelId)
