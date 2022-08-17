@@ -48,7 +48,7 @@ namespace HotelInn.Services.Services
             if (hotel == null || hotel.HotelId == null)
                 return "Value cannot be null";
 
-            var alreadySavedData = await hotelRepository.Value.FindHotelAsync(hotel.HotelId);
+            Domain.Models.Hotel alreadySavedData = await hotelRepository.Value.FindHotelAsync(hotel.HotelId);
             if (alreadySavedData == null)
                 return "Hotel ID does not match any records!";
 
@@ -81,7 +81,7 @@ namespace HotelInn.Services.Services
             if (string.IsNullOrWhiteSpace(hotelId))
                 return null;
 
-            var hotel = await hotelRepository.Value.FindHotelAsync(hotelId);
+            Domain.Models.Hotel hotel = await hotelRepository.Value.FindHotelAsync(hotelId);
             if (hotel == null)
                 return null;
 
@@ -111,7 +111,7 @@ namespace HotelInn.Services.Services
             if (string.IsNullOrWhiteSpace(hotelId))
                 return "Hotel ID is not provided!";
 
-            var hotel = await hotelRepository.Value.FindHotelAsync(hotelId);
+            Domain.Models.Hotel hotel = await hotelRepository.Value.FindHotelAsync(hotelId);
             if (hotel == null)
                 return "Hotel ID does not match any records!";
 

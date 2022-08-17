@@ -9,6 +9,7 @@ namespace HotelInn.Services
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddTransient<IHotelService, HotelService>();
+            services.AddTransient<IBookingService, BookingService>();
         }
     }
 }
