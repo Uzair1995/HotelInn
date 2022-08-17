@@ -19,7 +19,6 @@ namespace HotelInn.Presentation.Controllers
             this.hotelService = hotelService;
         }
 
-
         [SwaggerOperation(Summary = "Get hotel details.")]
         [HttpGet]
         public async Task<Hotel> GetHotelDetailsAsync([FromQuery] string hotelId)
@@ -34,7 +33,6 @@ namespace HotelInn.Presentation.Controllers
             return await hotelService.Value.FindHotelAsync(hotelId);
         }
 
-
         [SwaggerOperation(Summary = "Add a new hotel.")]
         [HttpPost]
         public async Task<string> AddNewHotelAsync(NewHotel hotel)
@@ -44,7 +42,7 @@ namespace HotelInn.Presentation.Controllers
 
         [SwaggerOperation(Summary = "Update values of a hotel.")]
         [HttpPut]
-        public async Task<string> AddNewHotelAsync(Hotel hotel)
+        public async Task<string> UpdateHotelAsync(Hotel hotel)
         {
             return await hotelService.Value.UpdateHotelAsync(hotel);
         }

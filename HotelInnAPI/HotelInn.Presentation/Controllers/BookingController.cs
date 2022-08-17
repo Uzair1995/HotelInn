@@ -10,7 +10,7 @@ namespace HotelInn.Presentation.Controllers
 {
     [Route("[Controller]")]
     [ApiController]
-    [SwaggerTag("APIs to manage hotels.")]
+    [SwaggerTag("APIs to manage bookings.")]
 
     public class BookingController
     {
@@ -47,6 +47,20 @@ namespace HotelInn.Presentation.Controllers
         public async Task<List<Booking>> GetHotelBookingsListAsync([FromQuery] string hotelId)
         {
             return await bookingService.Value.FindHotelBookingsAsync(hotelId);
+        }
+
+        [SwaggerOperation(Summary = "Update values of a booking.")]
+        [HttpPut]
+        public async Task<string> UpdateBookingAsync(Booking booking)
+        {
+            return await bookingService.Value.UpdateBookingAsync(booking);
+        }
+
+        [SwaggerOperation(Summary = "Cancel a booking.")]
+        [HttpDelete]
+        public async Task<string> DeleteBookingAsync([FromQuery] string bookingId)
+        {
+            return await bookingService.Value.DeleteBookingAsync(bookingId);
         }
     }
 }
