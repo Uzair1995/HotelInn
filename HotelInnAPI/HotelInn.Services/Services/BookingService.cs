@@ -33,6 +33,8 @@ namespace HotelInn.Services.Services
             Domain.Models.Hotel hotel = await hotelRepository.Value.FindHotelAsync(newBooking.HotelId);
             if (hotel == null)
                 return "Hotel ID does not match any records!";
+            if (!hotel.Availability)
+                return "This hotel is all booked!";
 
             Domain.Models.User user = await userRepository.Value.FindUserAsync(newBooking.UserId);
             if (user == null)
