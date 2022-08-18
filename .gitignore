@@ -22,3 +22,7 @@
 /HotelInnAPI/HotelInnAPI.Tests/obj
 /HotelInnAuthorizer/.vs/HotelInnAuthorizer/v16
 /HotelInnAuthorizer/HotelInnAuthorizer/obj
+/HotelInnAuthorizer/HotelInnAuthorizer.Repositories/obj
+/HotelInnAuthorizer/.vs/HotelInnAuthorizer/DesignTimeBuild
+/HotelInnAuthorizer/HotelInnAuthorizer/bin/Debug/net5.0
+/HotelInnAuthorizer/HotelInnAuthorizer.Repositories/bin/Debug/net5.0
