@@ -20,3 +20,5 @@
 /HotelInnAPI/Serilog/Logs
 /HotelInnAPI/HotelInnAPI.Tests/bin/Debug/net5.0
 /HotelInnAPI/HotelInnAPI.Tests/obj
+/HotelInnAuthorizer/.vs/HotelInnAuthorizer/v16
+/HotelInnAuthorizer/HotelInnAuthorizer/obj
