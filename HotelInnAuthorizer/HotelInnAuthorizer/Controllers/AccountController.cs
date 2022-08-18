@@ -37,14 +37,10 @@ namespace HotelInnAuthorizer.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<bool> LoginUserAccountAsync(RegisterUser registerUser)
+        public async Task<bool> LoginUserAccountAsync(LoginUser loginUser)
         {
-            IdentityUser user = new IdentityUser
-            {
-                UserName = registerUser.Name,
-                Id = Guid.NewGuid().ToString()
-            };
-            IdentityResult result = await userManager.CreateAsync(user, registerUser.Password);
+            Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(loginUser.Name, loginUser.Password, false, false);
+
             if (result.Succeeded)
                 return true;
             return false;
