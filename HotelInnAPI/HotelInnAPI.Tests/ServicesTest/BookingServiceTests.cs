@@ -151,8 +151,77 @@ namespace HotelInnAPI.Tests.ServicesTest
             //Assert
             result.Should().BeEquivalentTo("Saved successfully!");
         }
-    
 
 
+        /// <summary>
+        /// Tests to cancel a booking
+        /// </summary>
+        /// <returns></returns>
+        [Fact]
+        public async Task DeleteBookingAsync_InvalidBookingIdGiven_ReturnsBookingNotFoundAsync()
+        {
+            //Arrange
+            bookingRepoStub.Setup(repo => repo.FindBookingAsync(It.IsAny<string>())).ReturnsAsync((HotelInn.Domain.Models.Booking)null);
+            IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
+            string bookingId = "SampleBookingId";
+
+            //Act
+            string result = await bookingService.DeleteBookingAsync(bookingId);
+
+            //Assert
+            result.Should().BeEquivalentTo("Booking ID does not match any records!");
+        }
+        [Fact]
+        public async Task DeleteBookingAsync_ValidBookingIdGiven_ReturnsBookingCancelledAsync()
+        {
+            //Arrange
+            HotelInn.Domain.Models.Booking sampleBooking = new HotelInn.Domain.Models.Booking { BookingId = "SampleBookingId" };
+            bookingRepoStub.Setup(repo => repo.FindBookingAsync(It.IsAny<string>())).ReturnsAsync(sampleBooking);
+            IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
+            string bookingId = "SampleBookingId";
+
+            //Act
+            string result = await bookingService.DeleteBookingAsync(bookingId);
+
+            //Assert
+            result.Should().BeEquivalentTo("Delete successfully!");
+        }
+
+
+        /// <summary>
+        /// Tests for finding a booking details
+        /// </summary>
+        [Fact]
+        public async void FindBookingAsync_InvalidBookingIdGiven_ReturnsNullAsync()
+        {
+            //Arrange
+            bookingRepoStub.Setup(repo => repo.FindBookingAsync(It.IsAny<string>())).ReturnsAsync((HotelInn.Domain.Models.Booking)null);
+            IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
+            string bookingId = "SampleBookingId";
+
+            //Act
+            HotelInn.Contracts.Booking.Booking result = await bookingService.FindBookingAsync(bookingId);
+
+            //Assert
+            result.Should().BeNull();
+        }
+        [Fact]
+        public async void FindBookingAsync_ValidBookingIdGiven_ReturnsBookingObjectAsync()
+        {
+            //Arrange
+            HotelInn.Domain.Models.Booking sampleBooking = new HotelInn.Domain.Models.Booking { BookingId = "SampleBookingId" };
+            bookingRepoStub.Setup(repo => repo.FindBookingAsync(It.IsAny<string>())).ReturnsAsync(sampleBooking);
+            IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
+            HotelInn.Contracts.Booking.Booking expectedBooking = new HotelInn.Contracts.Booking.Booking
+            {
+                BookingId = sampleBooking.BookingId
+            };
+
+            //Act
+            HotelInn.Contracts.Booking.Booking result = await bookingService.FindBookingAsync(expectedBooking.BookingId);
+
+            //Assert
+            result.Should().BeEquivalentTo(expectedBooking);
+        }
     }
 }
