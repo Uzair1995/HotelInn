@@ -19,7 +19,7 @@ namespace HotelInn.Services.Services
         public async Task<string> AddNewHotelAsync(Contracts.Hotel.NewHotel hotel)
         {
             if (hotel == null)
-                return "Value cannot be null";
+                return "Value cannot be null!";
 
             Domain.Models.Hotel newHotel = new Domain.Models.Hotel
             {
