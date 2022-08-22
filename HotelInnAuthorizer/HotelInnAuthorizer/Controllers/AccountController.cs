@@ -1,4 +1,5 @@
 ﻿using HotelInnAuthorizer.Models;
+using HotelInnAuthorizer.Repositories.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,35 +20,39 @@ namespace HotelInnAuthorizer.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly ILogger<AccountController> _logger;
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly IConfiguration configuration;
 
         public AccountController(
-            ILogger<AccountController> logger,
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
             IConfiguration configuration)
         {
-            _logger = logger;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
         }
 
         [HttpPost("Register")]
-        public async Task<bool> RegisterNewUserAccountAsync(RegisterUser registerUser)
+        public async Task<IActionResult> RegisterNewUserAccountAsync(RegisterUser registerUser)
         {
-            IdentityUser user = new IdentityUser
-            {
-                UserName = registerUser.Name,
-                Id = Guid.NewGuid().ToString()
-            };
+            User user = GetUserModel(registerUser, "User");
             IdentityResult result = await userManager.CreateAsync(user, registerUser.Password);
             if (result.Succeeded)
-                return true;
-            return false;
+                return Ok(result);
+            return BadRequest(result);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        [HttpPost("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdminUserAccountAsync(RegisterUser registerUser)
+        {
+            User user = GetUserModel(registerUser, "Admin");
+            IdentityResult result = await userManager.CreateAsync(user, registerUser.Password);
+            if (result.Succeeded)
+                return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPost("Login")]
@@ -76,11 +81,25 @@ namespace HotelInnAuthorizer.Controllers
             return Ok(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
-        [HttpGet("GET")]
-        public string Sample()
+        /// <summary>
+        /// Private
+        /// </summary>
+        /// <param name="registerUser"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        private static User GetUserModel(RegisterUser registerUser, string role)
         {
-            return "WORKING!";
+            return new User
+            {
+                UserName = registerUser.Name,
+                Id = Guid.NewGuid().ToString(),
+                Name = registerUser.Name,
+                Role = role,
+                Gender = registerUser.Gender,
+                Address = registerUser.Address,
+                City = registerUser.City,
+                Country = registerUser.Country
+            };
         }
     }
 }

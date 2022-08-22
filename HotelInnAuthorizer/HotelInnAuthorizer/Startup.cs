@@ -1,4 +1,5 @@
 using HotelInnAuthorizer.Repositories;
+using HotelInnAuthorizer.Repositories.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,7 +45,7 @@ namespace HotelInnAuthorizer
             services.AddRepositories(Configuration);
 
             services.AddDbContext<AuthorizerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;

@@ -4,14 +4,16 @@ using HotelInnAuthorizer.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelInnAuthorizer.Repositories.Migrations
 {
     [DbContext(typeof(AuthorizerDbContext))]
-    partial class AuthorizerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220821133012_ExtendedIdentityUser")]
+    partial class ExtendedIdentityUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

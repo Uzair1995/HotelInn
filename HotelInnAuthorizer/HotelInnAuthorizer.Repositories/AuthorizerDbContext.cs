@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using HotelInnAuthorizer.Repositories.Models;
 
 namespace HotelInnAuthorizer.Repositories
 {
-    public class AuthorizerDbContext : IdentityDbContext
+    public class AuthorizerDbContext : IdentityDbContext<User>
     {
         public AuthorizerDbContext(DbContextOptions<AuthorizerDbContext> dbContextOptions) : base(dbContextOptions)
         {
@@ -12,7 +13,6 @@ namespace HotelInnAuthorizer.Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Seed();
         }
     }
 }
