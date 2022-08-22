@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInnAuthorizer", "HotelInnAuthorizer\HotelInnAuthorizer.csproj", "{1AD25DA9-080E-4BD3-B9B6-4B70C3A3456D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInnAuthorizer", "HotelInnAuthorizer\HotelInnAuthorizer.csproj", "{1AD25DA9-080E-4BD3-B9B6-4B70C3A3456D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInnAuthorizer.Repositories", "HotelInnAuthorizer.Repositories\HotelInnAuthorizer.Repositories.csproj", "{8FA957E0-323C-4BAE-B39B-5674C7013536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelInnAuthorizer.Repositories", "HotelInnAuthorizer.Repositories\HotelInnAuthorizer.Repositories.csproj", "{8FA957E0-323C-4BAE-B39B-5674C7013536}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelInnAuthorizer.Services", "HotelInnAuthorizer.Services\HotelInnAuthorizer.Services.csproj", "{480E7EEC-7A73-46D7-B58D-7447E7B65BC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8FA957E0-323C-4BAE-B39B-5674C7013536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FA957E0-323C-4BAE-B39B-5674C7013536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FA957E0-323C-4BAE-B39B-5674C7013536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{480E7EEC-7A73-46D7-B58D-7447E7B65BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480E7EEC-7A73-46D7-B58D-7447E7B65BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480E7EEC-7A73-46D7-B58D-7447E7B65BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480E7EEC-7A73-46D7-B58D-7447E7B65BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

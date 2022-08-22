@@ -1,5 +1,6 @@
 using HotelInnAuthorizer.Repositories;
 using HotelInnAuthorizer.Repositories.Models;
+using HotelInnAuthorizer.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +44,7 @@ namespace HotelInnAuthorizer
             services.AddMvc();
             services.AddControllers();
             services.AddRepositories(Configuration);
+            services.AddServices(Configuration);
 
             services.AddDbContext<AuthorizerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddIdentity<User, IdentityRole>(options =>
