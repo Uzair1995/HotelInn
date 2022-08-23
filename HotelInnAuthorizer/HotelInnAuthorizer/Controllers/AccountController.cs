@@ -24,7 +24,7 @@ namespace HotelInnAuthorizer.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterNewUserAccountAsync([FromBody] RegisterAccount registerAccount)
         {
-            IdentityResult result = await accountService.RegisterNewAccount(registerAccount.ToDto("User"));
+            Services.Models.RegisterResult result = await accountService.RegisterNewAccount(registerAccount.ToDto("User"));
             if (result.Succeeded)
                 return Ok(result);
             return BadRequest(result);
@@ -34,7 +34,7 @@ namespace HotelInnAuthorizer.Controllers
         [HttpPost("RegisterAdmin")]
         public async Task<IActionResult> RegisterAdminUserAccountAsync([FromBody] RegisterAccount registerAccount)
         {
-            IdentityResult result = await accountService.RegisterNewAccount(registerAccount.ToDto("Admin"));
+            Services.Models.RegisterResult result = await accountService.RegisterNewAccount(registerAccount.ToDto("Admin"));
             if (result.Succeeded)
                 return Ok(result);
             return BadRequest(result);

@@ -18,7 +18,7 @@ namespace HotelInnAuthorizer.Services.Models
             return new User
             {
                 UserName = Name,
-                Id = Guid.NewGuid().ToString(),
+                Id = Name,
                 Name = Name,
                 Role = Role,
                 Gender = Gender,

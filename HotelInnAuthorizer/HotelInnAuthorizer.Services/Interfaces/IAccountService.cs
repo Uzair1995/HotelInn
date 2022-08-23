@@ -6,7 +6,7 @@ namespace HotelInnAuthorizer.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<IdentityResult> RegisterNewAccount(RegisterAccount registerAccount);
+        Task<RegisterResult> RegisterNewAccount(RegisterAccount registerAccount);
         Task<LoginResult> LoginAccountAsync(string username, string password);
     }
 }

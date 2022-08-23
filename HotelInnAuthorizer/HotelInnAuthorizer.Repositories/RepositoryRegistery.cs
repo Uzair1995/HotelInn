@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HotelInnAuthorizer.Repositories.Interfaces;
+using HotelInnAuthorizer.Repositories.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelInnAuthorizer.Repositories
@@ -7,6 +9,7 @@ namespace HotelInnAuthorizer.Repositories
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<IAccountRepository, AccountRepository>();
             return services;
         }
     }
