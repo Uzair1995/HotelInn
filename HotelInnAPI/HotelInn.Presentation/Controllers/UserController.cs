@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HotelInn.Contracts.User;
 using HotelInn.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -20,6 +21,7 @@ namespace HotelInn.Presentation.Controllers
             this.userService = userService;
         }
 
+        [Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "Create new user.")]
         [HttpPost]
         public async Task<string> CreateNewUserAsync(NewUser newUser)

@@ -8,6 +8,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using System.Text;
 
 namespace HotelInnAPI
 {
@@ -38,6 +42,21 @@ namespace HotelInnAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelInnAPI", Version = "v1" });
                 c.EnableAnnotations();
             });
+
+            //Adding jwt authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudiences = Configuration["Jwt:Audience"].Split(',').ToList(),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +73,7 @@ namespace HotelInnAPI
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

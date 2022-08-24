@@ -1,8 +1,8 @@
 ﻿using HotelInnAuthorizer.Models;
 using HotelInnAuthorizer.Services.Interfaces;
+using HotelInnAuthorizer.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -50,6 +50,27 @@ namespace HotelInnAuthorizer.Controllers
                 return Unauthorized(result);
 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("Details")]
+        public async Task<IActionResult> GetAccountDetailsAsync()
+        {
+            Repositories.Models.User result = await accountService.GetAccountDetailsAsync(HttpContext.User.GetUsername());
+
+            if (result == null)
+                return BadRequest("No data found!");
+
+            AccountDetails accountDetails = new AccountDetails
+            {
+                Name = result.Name,
+                Role = result.Role,
+                Address = result.Address,
+                City = result.City,
+                Country = result.Country,
+                Gender = result.Gender
+            };
+            return Ok(accountDetails);
         }
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,11 +54,11 @@ namespace HotelInnAuthorizer
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Audience"],
+                    ValidAudiences = Configuration["Jwt:Audience"].Split(',').ToList(),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });

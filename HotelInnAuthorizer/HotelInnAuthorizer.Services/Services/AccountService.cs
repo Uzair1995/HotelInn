@@ -87,5 +87,11 @@ namespace HotelInnAuthorizer.Services.Services
                 Succeeded = true
             };
         }
+
+        public async Task<User> GetAccountDetailsAsync(string username)
+        {
+            User user = await accountRepository.GetUserDetailsAsync(username);
+            return user;
+        }
     }
 }
