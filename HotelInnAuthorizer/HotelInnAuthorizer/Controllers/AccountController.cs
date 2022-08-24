@@ -53,7 +53,7 @@ namespace HotelInnAuthorizer.Controllers
         }
 
         [Authorize]
-        [HttpPost("Details")]
+        [HttpGet("Details")]
         public async Task<IActionResult> GetAccountDetailsAsync()
         {
             Repositories.Models.User result = await accountService.GetAccountDetailsAsync(HttpContext.User.GetUsername());

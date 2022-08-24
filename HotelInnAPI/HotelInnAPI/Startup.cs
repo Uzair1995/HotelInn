@@ -90,7 +90,7 @@ namespace HotelInnAPI
         private void RegisterClasses(IServiceCollection services)
         {
             services.AddTransient(typeof(Lazy<>), typeof(LazyInstance<>));
-
+            services.AddHttpContextAccessor();
             //Register services and repositories modules in DI container
             services.RegisterServices();
             services.RegisterRepositories(Configuration);

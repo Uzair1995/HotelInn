@@ -38,7 +38,7 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                UserId = "SampleUserId",
+                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now,
                 CheckoutDateTime = DateTime.Now.AddDays(-1)
@@ -58,7 +58,7 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                UserId = "SampleUserId",
+                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
@@ -83,7 +83,7 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                UserId = "SampleUserId",
+                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
@@ -105,11 +105,11 @@ namespace HotelInnAPI.Tests.ServicesTest
                 Availability = true
             };
             hotelRepoStub.Setup(repo => repo.FindHotelAsync(It.IsAny<string>())).ReturnsAsync(sampleHotel);
-            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>())).ReturnsAsync((HotelInn.Domain.Models.User)null);
+            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((HotelInn.Domain.Models.User)null);
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                UserId = "SampleUserId",
+                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
@@ -133,13 +133,13 @@ namespace HotelInnAPI.Tests.ServicesTest
             hotelRepoStub.Setup(repo => repo.FindHotelAsync(It.IsAny<string>())).ReturnsAsync(sampleHotel);
             HotelInn.Domain.Models.User sampleUser = new HotelInn.Domain.Models.User
             {
-                UserId = "SampleUserId"
+                Name = "SampleUserName"
             };
-            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>())).ReturnsAsync(sampleUser);
+            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(sampleUser);
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                UserId = "SampleUserId",
+                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)

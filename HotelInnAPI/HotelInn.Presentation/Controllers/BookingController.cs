@@ -1,5 +1,7 @@
 ﻿using HotelInn.Contracts.Booking;
+using HotelInn.Presentation.Utils;
 using HotelInn.Services.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -15,17 +17,20 @@ namespace HotelInn.Presentation.Controllers
     public class BookingController
     {
         private readonly Lazy<IBookingService> bookingService;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public BookingController(Lazy<IBookingService> bookingService)
+        public BookingController(Lazy<IBookingService> bookingService, IHttpContextAccessor httpContextAccessor)
         {
             this.bookingService = bookingService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [SwaggerOperation(Summary = "Place a booking.")]
         [HttpPost]
         public async Task<string> AddNewBookingAsync(NewBooking newBooking)
         {
-            return await bookingService.Value.AddNewBookingAsync(newBooking);
+            var token = httpContextAccessor.HttpContext.GetAccessToken();
+            return await bookingService.Value.AddNewBookingAsync(newBooking, token);
         }
 
         [SwaggerOperation(Summary = "Get a specific booking details.")]
@@ -53,7 +58,8 @@ namespace HotelInn.Presentation.Controllers
         [HttpPut]
         public async Task<string> UpdateBookingAsync(Booking booking)
         {
-            return await bookingService.Value.UpdateBookingAsync(booking);
+            var token = httpContextAccessor.HttpContext.GetAccessToken();
+            return await bookingService.Value.UpdateBookingAsync(booking, token);
         }
 
         [SwaggerOperation(Summary = "Cancel a booking.")]

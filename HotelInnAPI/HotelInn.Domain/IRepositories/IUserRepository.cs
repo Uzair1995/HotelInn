@@ -1,14 +1,10 @@
 ﻿using HotelInn.Domain.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelInn.Domain.IRepositories
 {
     public interface IUserRepository
     {
-        Task AddOrUpdateUserAsync(User user);
-        Task<User> FindUserAsync(string userId);
-        Task DeleteUserAsync(string userId);
-        Task<List<User>> ListAllUsersAsync();
+        Task<User> FindUserAsync(string httpAccessToken);
     }
 }

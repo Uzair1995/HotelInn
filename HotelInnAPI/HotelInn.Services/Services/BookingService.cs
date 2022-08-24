@@ -23,7 +23,7 @@ namespace HotelInn.Services.Services
             this.userRepository = userRepository;
         }
 
-        public async Task<string> AddNewBookingAsync(Contracts.Booking.NewBooking newBooking)
+        public async Task<string> AddNewBookingAsync(Contracts.Booking.NewBooking newBooking, string httpAccessToken)
         {
             if (newBooking == null)
                 return "Value cannot be null!";
@@ -37,14 +37,14 @@ namespace HotelInn.Services.Services
             if (!hotel.Availability)
                 return "This hotel is all booked!";
 
-            Domain.Models.User user = await userRepository.Value.FindUserAsync(newBooking.UserId);
+            Domain.Models.User user = await userRepository.Value.FindUserAsync(httpAccessToken);
             if (user == null)
                 return "User ID does not match any records!";
 
             Domain.Models.Booking booking = new Domain.Models.Booking
             {
                 HotelId = newBooking.HotelId,
-                UserId = newBooking.UserId,
+                UserId = newBooking.Username,
                 CheckinDateTime = newBooking.CheckinDateTime,
                 CheckoutDateTime = newBooking.CheckoutDateTime
             };
@@ -90,7 +90,7 @@ namespace HotelInn.Services.Services
             return bookings.Select(x => x.ToDto()).ToList();
         }
 
-        public async Task<string> UpdateBookingAsync(Contracts.Booking.Booking booking)
+        public async Task<string> UpdateBookingAsync(Contracts.Booking.Booking booking, string httpAccessToken)
         {
             if (booking == null || booking.BookingId == null)
                 return "Value cannot be null";
@@ -108,14 +108,14 @@ namespace HotelInn.Services.Services
             if (!hotel.Availability)
                 return "This hotel is all booked!";
 
-            Domain.Models.User user = await userRepository.Value.FindUserAsync(booking.UserId);
+            Domain.Models.User user = await userRepository.Value.FindUserAsync(httpAccessToken);
             if (user == null)
                 return "User ID does not match any records!";
 
             Domain.Models.Booking updateBooking = new Domain.Models.Booking
             {
                 BookingId = booking.BookingId,
-                UserId = booking.UserId,
+                UserId = booking.Username,
                 HotelId = booking.HotelId,
                 CheckinDateTime = booking.CheckinDateTime,
                 CheckoutDateTime = booking.CheckoutDateTime

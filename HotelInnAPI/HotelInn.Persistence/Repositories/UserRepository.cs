@@ -1,62 +1,41 @@
 ﻿using HotelInn.Domain.IRepositories;
 using HotelInn.Domain.Models;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Reflection;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace HotelInn.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly HotelInnDbContext hotelInnDbContext;
+        private readonly IConfiguration configuration;
 
-        public UserRepository(HotelInnDbContext hotelInnDbContext)
+        public UserRepository(IConfiguration configuration)
         {
-            this.hotelInnDbContext = hotelInnDbContext;
+            this.configuration = configuration;
         }
 
-        public async Task AddOrUpdateUserAsync(User user)
+        public async Task<User> FindUserAsync(string httpAccessToken)
         {
-            user.LastUpdateTime = DateTime.Now;
-            var alreadySavedData = await hotelInnDbContext.Users.FindAsync(user.UserId);
+            HttpClient client = new HttpClient();
+            client.Timeout = TimeSpan.FromSeconds(300);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("Authorization", httpAccessToken);
 
-            if (alreadySavedData == null)
+            string accountDetailsUri = $"{configuration["Jwt:Issuer"]}/Account/Details";
+            var httpResponse = await client.GetAsync(accountDetailsUri);
+            if (httpResponse != null && httpResponse.IsSuccessStatusCode && httpResponse.Content != null)
             {
-                user.SaveDateTime = DateTime.Now;
-                hotelInnDbContext.Users.Add(user);
-            }
-            else
-            {
-                foreach (PropertyInfo info in user.GetType().GetProperties())
-                {
-                    info.SetValue(alreadySavedData, info.GetValue(user));
-                }
-                hotelInnDbContext.Users.Update(alreadySavedData);
+                string data = await httpResponse.Content.ReadAsStringAsync();
+                User user = JsonConvert.DeserializeObject<User>(data);
+                return user;
             }
 
-            await hotelInnDbContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteUserAsync(string userId)
-        {
-            var alreadySavedData = await hotelInnDbContext.Users.FindAsync(userId);
-            if (alreadySavedData != null)
-            {
-                hotelInnDbContext.Users.Remove(alreadySavedData);
-                await hotelInnDbContext.SaveChangesAsync();
-            }
-        }
-
-        public async Task<User> FindUserAsync(string userId)
-        {
-            return await hotelInnDbContext.Users.FindAsync(userId);
-        }
-
-        public async Task<List<User>> ListAllUsersAsync()
-        {
-            return await hotelInnDbContext.Users.ToListAsync();
+            return null;
         }
     }
 }
