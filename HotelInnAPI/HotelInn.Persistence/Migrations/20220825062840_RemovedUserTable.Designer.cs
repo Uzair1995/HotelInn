@@ -4,14 +4,16 @@ using HotelInn.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelInn.Persistence.Migrations
 {
     [DbContext(typeof(HotelInnDbContext))]
-    partial class HotelInnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220825062840_RemovedUserTable")]
+    partial class RemovedUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

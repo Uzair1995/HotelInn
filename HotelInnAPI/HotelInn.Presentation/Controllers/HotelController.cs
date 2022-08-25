@@ -21,7 +21,7 @@ namespace HotelInn.Presentation.Controllers
             this.hotelService = hotelService;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [SwaggerOperation(Summary = "Get hotel details.")]
         [HttpGet]
         public async Task<Hotel> GetHotelDetailsAsync([FromQuery] string hotelId)
@@ -29,7 +29,7 @@ namespace HotelInn.Presentation.Controllers
             return await hotelService.Value.FindHotelAsync(hotelId);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [SwaggerOperation(Summary = "List hotels.")]
         [HttpGet("list")]
         public async Task<List<Hotel>> GetHotelsListAsync([FromQuery] SearchHotel searchHotel)

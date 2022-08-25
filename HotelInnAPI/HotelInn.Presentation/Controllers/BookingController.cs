@@ -35,6 +35,7 @@ namespace HotelInn.Presentation.Controllers
             return await bookingService.Value.AddNewBookingAsync(newBooking, token);
         }
 
+        //TODO: verify if the booking belongs to this user. Only then send the details
         [Authorize]
         [SwaggerOperation(Summary = "Get a specific booking details.")]
         [HttpGet]
@@ -46,12 +47,12 @@ namespace HotelInn.Presentation.Controllers
         [Authorize]
         [SwaggerOperation(Summary = "List all bookings of a specific user.")]
         [HttpGet("userbookings")]
-        public async Task<List<Booking>> GetUserBookingsListAsync([FromQuery] string userId)
+        public async Task<List<Booking>> GetUserBookingsListAsync()
         {
-            return await bookingService.Value.FindUserBookingsAsync(userId);
+            return await bookingService.Value.FindUserBookingsAsync(httpContextAccessor.HttpContext.User.GetUsername());
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [SwaggerOperation(Summary = "List all bookings of a specific hotel.")]
         [HttpGet("hotelbookings")]
         public async Task<List<Booking>> GetHotelBookingsListAsync([FromQuery] string hotelId)
