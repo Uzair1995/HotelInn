@@ -26,7 +26,7 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
 
             //Act
-            string result = await bookingService.AddNewBookingAsync(null);
+            string result = await bookingService.AddNewBookingAsync(null, null);
 
             //Assert
             result.Should().BeEquivalentTo("Value cannot be null!");
@@ -38,14 +38,13 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now,
                 CheckoutDateTime = DateTime.Now.AddDays(-1)
             };
 
             //Act
-            string result = await bookingService.AddNewBookingAsync(newBooking);
+            string result = await bookingService.AddNewBookingAsync(newBooking, null);
 
             //Assert
             result.Should().BeEquivalentTo("Invalid checkin checkout time provided!");
@@ -58,14 +57,13 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
             };
 
             //Act
-            string result = await bookingService.AddNewBookingAsync(newBooking);
+            string result = await bookingService.AddNewBookingAsync(newBooking, null);
 
             //Assert
             result.Should().BeEquivalentTo("Hotel ID does not match any records!");
@@ -83,14 +81,13 @@ namespace HotelInnAPI.Tests.ServicesTest
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
             };
 
             //Act
-            string result = await bookingService.AddNewBookingAsync(newBooking);
+            string result = await bookingService.AddNewBookingAsync(newBooking, null);
 
             //Assert
             result.Should().BeEquivalentTo("This hotel is all booked!");
@@ -105,18 +102,17 @@ namespace HotelInnAPI.Tests.ServicesTest
                 Availability = true
             };
             hotelRepoStub.Setup(repo => repo.FindHotelAsync(It.IsAny<string>())).ReturnsAsync(sampleHotel);
-            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((HotelInn.Domain.Models.User)null);
+            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>())).ReturnsAsync((HotelInn.Domain.Models.User)null);
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
             };
 
             //Act
-            string result = await bookingService.AddNewBookingAsync(newBooking);
+            string result = await bookingService.AddNewBookingAsync(newBooking, null);
 
             //Assert
             result.Should().BeEquivalentTo("User ID does not match any records!");
@@ -135,18 +131,17 @@ namespace HotelInnAPI.Tests.ServicesTest
             {
                 Name = "SampleUserName"
             };
-            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(sampleUser);
+            userRepoStub.Setup(repo => repo.FindUserAsync(It.IsAny<string>())).ReturnsAsync(sampleUser);
             IBookingService bookingService = new BookingService(new Lazy<IBookingRepository>(bookingRepoStub.Object), new Lazy<IHotelRepository>(hotelRepoStub.Object), new Lazy<IUserRepository>(userRepoStub.Object));
             HotelInn.Contracts.Booking.NewBooking newBooking = new HotelInn.Contracts.Booking.NewBooking
             {
-                Username = "SampleUserName",
                 HotelId = "SampleHotelId",
                 CheckinDateTime = DateTime.Now.AddDays(1),
                 CheckoutDateTime = DateTime.Now.AddDays(2)
             };
 
             //Act
-            string result = await bookingService.AddNewBookingAsync(newBooking);
+            string result = await bookingService.AddNewBookingAsync(newBooking, null);
 
             //Assert
             result.Should().BeEquivalentTo("Saved successfully!");

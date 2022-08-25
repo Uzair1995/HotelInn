@@ -21,7 +21,6 @@ namespace HotelInn.Domain.Models
             return new Contracts.Booking.Booking
             {
                 BookingId = BookingId,
-                Username = UserId,
                 HotelId = HotelId,
                 CheckinDateTime = CheckinDateTime,
                 CheckoutDateTime = CheckoutDateTime

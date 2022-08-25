@@ -1,6 +1,7 @@
 ﻿using HotelInn.Contracts.Booking;
 using HotelInn.Presentation.Utils;
 using HotelInn.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -25,6 +26,7 @@ namespace HotelInn.Presentation.Controllers
             this.httpContextAccessor = httpContextAccessor;
         }
 
+        [Authorize]
         [SwaggerOperation(Summary = "Place a booking.")]
         [HttpPost]
         public async Task<string> AddNewBookingAsync(NewBooking newBooking)
@@ -33,6 +35,7 @@ namespace HotelInn.Presentation.Controllers
             return await bookingService.Value.AddNewBookingAsync(newBooking, token);
         }
 
+        [Authorize]
         [SwaggerOperation(Summary = "Get a specific booking details.")]
         [HttpGet]
         public async Task<Booking> GetBookingDetailsAsync([FromQuery] string bookingId)
@@ -40,6 +43,7 @@ namespace HotelInn.Presentation.Controllers
             return await bookingService.Value.FindBookingAsync(bookingId);
         }
 
+        [Authorize]
         [SwaggerOperation(Summary = "List all bookings of a specific user.")]
         [HttpGet("userbookings")]
         public async Task<List<Booking>> GetUserBookingsListAsync([FromQuery] string userId)
@@ -47,6 +51,7 @@ namespace HotelInn.Presentation.Controllers
             return await bookingService.Value.FindUserBookingsAsync(userId);
         }
 
+        [Authorize]
         [SwaggerOperation(Summary = "List all bookings of a specific hotel.")]
         [HttpGet("hotelbookings")]
         public async Task<List<Booking>> GetHotelBookingsListAsync([FromQuery] string hotelId)
@@ -54,6 +59,7 @@ namespace HotelInn.Presentation.Controllers
             return await bookingService.Value.FindHotelBookingsAsync(hotelId);
         }
 
+        [Authorize]
         [SwaggerOperation(Summary = "Update values of a booking.")]
         [HttpPut]
         public async Task<string> UpdateBookingAsync(Booking booking)
@@ -62,6 +68,7 @@ namespace HotelInn.Presentation.Controllers
             return await bookingService.Value.UpdateBookingAsync(booking, token);
         }
 
+        [Authorize]
         [SwaggerOperation(Summary = "Cancel a booking.")]
         [HttpDelete]
         public async Task<string> DeleteBookingAsync([FromQuery] string bookingId)

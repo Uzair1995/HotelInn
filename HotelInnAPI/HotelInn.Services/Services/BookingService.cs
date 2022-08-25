@@ -44,7 +44,7 @@ namespace HotelInn.Services.Services
             Domain.Models.Booking booking = new Domain.Models.Booking
             {
                 HotelId = newBooking.HotelId,
-                UserId = newBooking.Username,
+                UserId = user.Name,
                 CheckinDateTime = newBooking.CheckinDateTime,
                 CheckoutDateTime = newBooking.CheckoutDateTime
             };
@@ -115,7 +115,7 @@ namespace HotelInn.Services.Services
             Domain.Models.Booking updateBooking = new Domain.Models.Booking
             {
                 BookingId = booking.BookingId,
-                UserId = booking.Username,
+                UserId = user.Name,
                 HotelId = booking.HotelId,
                 CheckinDateTime = booking.CheckinDateTime,
                 CheckoutDateTime = booking.CheckoutDateTime
